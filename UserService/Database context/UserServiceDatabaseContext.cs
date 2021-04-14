@@ -9,12 +9,22 @@ namespace UserService
 {
     public class UserServiceDatabaseContext: DbContext
     {
+        public UserServiceDatabaseContext()
+        {
+
+        }
         public UserServiceDatabaseContext(DbContextOptions<UserServiceDatabaseContext> options):base(options)
         {
 
         }
         public DbSet<User> Users { get; set; }
 
-        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer("server=sqlserver, 1433;user id=sa;password=Your_password123;database=UserService;");
+
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }

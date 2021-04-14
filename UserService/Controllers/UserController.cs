@@ -99,9 +99,9 @@ namespace UserService.Controllers
         [HttpGet("allUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
-            User user = new User() { Email = "xD@gmail.com" };
-            //var Users = await _context.Users.ToListAsync();
-            var json  = JsonSerializer.Serialize(user);
+            //User user = new User() { Email = "xD@gmail.com" };
+            var Users = await _context.Users.ToListAsync();
+            var json  = JsonSerializer.Serialize(Users);
             return Ok(json);
         }
         [HttpGet("GetUsers")]

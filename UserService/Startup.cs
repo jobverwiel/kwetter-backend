@@ -61,8 +61,10 @@ namespace UserService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserService", Version = "v1" });
             });
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContextPool<UserServiceDatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            services.AddDbContext<UserServiceDatabaseContext>();
+
+            using var productContext = new UserServiceDatabaseContext();
+            productContext.Database.EnsureCreated();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
