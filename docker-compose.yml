@@ -8,6 +8,13 @@ services:
       ports:
         - "7100:15672"
         - "7101:5672"
+     logger:
+        image: "datalust/seq"
+        ports:
+        - "7200:80"
+        - "7201:5341"
+        environment:
+         ACCEPT_EULA: "Y"
      user-service:
                 build:
                  context: ./UserService
