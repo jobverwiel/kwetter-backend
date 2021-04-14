@@ -96,6 +96,14 @@ namespace UserService.Controllers
                 return randomString;
             }
         }
+        [HttpGet("allUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            User user = new User() { Email = "xD@gmail.com" };
+            //var Users = await _context.Users.ToListAsync();
+            var json  = JsonSerializer.Serialize(user);
+            return Ok(json);
+        }
         [HttpGet("GetUsers")]
         [Authorize]
         public async Task<IActionResult> GetUsers()

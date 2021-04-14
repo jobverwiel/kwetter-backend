@@ -23,6 +23,17 @@
       "UpstreamPathTemplate": "/api/user/getusers"
     },
     {
+      "DownstreamPathTemplate": "/User/allUsers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 22726
+        }
+      ],
+      "UpstreamPathTemplate": "/api/user/getallusers"
+    },
+    {
       "DownstreamPathTemplate": "/User/Register",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

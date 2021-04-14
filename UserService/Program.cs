@@ -20,7 +20,6 @@ namespace UserService
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseUrls("http://localhost:22726/");
                     webBuilder.UseStartup<Startup>();
                 });
     }
