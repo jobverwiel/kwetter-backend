@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,6 +80,8 @@ namespace UserService
 
             //app.UseHttpsRedirection();
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
@@ -91,6 +94,7 @@ namespace UserService
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
