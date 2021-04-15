@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UserService.Messaging;
 
 namespace UserService
 {
@@ -49,6 +50,10 @@ namespace UserService
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("KwetterSecretJWTTokenForAuthentication"))
                 };
             });
+
+            // Add messagepublisher
+            services.AddSingleton<IMessageService, MessageProducer>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using UserService.Messaging;
 using UserService.Models;
 using UserService.Models.ViewModels;
 using BC = BCrypt.Net.BCrypt;
@@ -19,9 +20,11 @@ namespace UserService.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserServiceDatabaseContext _context;
-        public UserController(UserServiceDatabaseContext context)
+        private readonly IMessageService _messageService;
+        public UserController(UserServiceDatabaseContext context, IMessageService messageService)
         {
             _context = context;
+            _messageService = messageService;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
@@ -99,11 +102,18 @@ namespace UserService.Controllers
         [HttpGet("allUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
-            
+            _messageService.Enqueue("Hello queue");
             //User user = new User() { Email = "xD@gmail.com" };
             var Users = await _context.Users.ToListAsync();
             var json  = JsonSerializer.Serialize(Users);
             return Ok(json);
+        }
+        [HttpGet("test")]
+        public async Task<IActionResult> test()
+        {
+            _messageService.Enqueue("Hello queue");
+            //User user = new User() { Email = "xD@gmail.com" };
+            return Ok();
         }
         [HttpGet("GetUsers")]
         [Authorize]

@@ -2,12 +2,12 @@ version: "3.7"
 services:
      rabbitmq:
       image: rabbitmq:3-management-alpine
-      container_name: rabbitmq
-      volumes:
-      - rabbitmq:/rabbitmq
+      hostname: rabbitmq
+      labels:
+        NAME: "rabbitmq"
       ports:
-        - "7100:15672"
-        - "7101:5672"
+        - "15672:15672"
+        - "5672:5672"
      logger:
         image: "datalust/seq"
         volumes:
@@ -33,6 +33,7 @@ services:
                 ports:
                     - "0.0.0.0:8081:80"
                 depends_on:
+                    - rabbitmq
                     - db
                     
      db:

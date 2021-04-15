@@ -1,26 +1,36 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
 namespace EmailService
 {
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+
+            var _factory = new ConnectionFactory();
+            _factory.UserName = "guest";
+            _factory.Password = "guest";
+            _factory.HostName = "rabbitmq";
+            _factory.Port = AmqpTcpEndpoint.UseDefaultPort;
+            var _conn = _factory.CreateConnection();
+            var _channel = _conn.CreateModel();
+            _channel.QueueDeclare("email-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
+
+            var consumer = new EventingBasicConsumer(_channel);
+            consumer.Received += (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var message = Encoding.UTF8.GetString(body);
+                Console.WriteLine(" [x] Received from Rabbit: {0}", message);
+            };
+            _channel.BasicConsume(queue: "email-queue",
+                                    autoAck: true,
+                                    consumer: consumer);
+            Console.ReadLine();
+        }
     }
 }
