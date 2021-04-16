@@ -15,9 +15,6 @@ namespace UserService.Messaging
         IModel _channel;
         public MessageProducer()
         {
-            //_factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 5672 };
-            //_factory.UserName = "guest";
-            //_factory.Password = "guest";
             _factory = new ConnectionFactory();
             _factory.UserName = "guest";
             _factory.Password = "guest";

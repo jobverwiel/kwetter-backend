@@ -8,14 +8,13 @@ services:
       ports:
         - "15672:15672"
         - "5672:5672"
-     logger:
-        image: "datalust/seq"
-        volumes:
-        - ./Logs:/data
+     logserver:
+        image: datalust/seq:latest
+        container_name: logserver
         ports:
-        - "5341:80"
+            - "5341:80"
         environment:
-         ACCEPT_EULA: "Y"
+            - ACCEPT_EULA=Y 
      ocelot-api-gateway:
                 build: 
                  context: ./OcelotGateway
@@ -35,6 +34,16 @@ services:
                 depends_on:
                     - rabbitmq
                     - db
+     #email-service:
+     #           build:
+     #            context: ./EmailService
+     #            dockerfile: Dockerfile
+     #           container_name: emailservice
+     #           ports:
+     #               - "0.0.0.0:8083:80"
+     #           depends_on:
+     #               - rabbitmq
+                    
                     
      db:
          image: "mcr.microsoft.com/mssql/server"

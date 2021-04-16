@@ -102,8 +102,6 @@ namespace UserService.Controllers
         [HttpGet("allUsers")]
         public async Task<IActionResult> GetAllUsers()
         {
-            _messageService.Enqueue("Hello queue");
-            //User user = new User() { Email = "xD@gmail.com" };
             var Users = await _context.Users.ToListAsync();
             var json  = JsonSerializer.Serialize(Users);
             return Ok(json);
