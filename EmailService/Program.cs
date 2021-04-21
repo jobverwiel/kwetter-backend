@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using KwetterMessaging.Consumer;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
@@ -9,28 +10,23 @@ namespace EmailService
     {
         static void Main(string[] args)
         {
-
-
-            var _factory = new ConnectionFactory();
-            _factory.UserName = "guest";
-            _factory.Password = "guest";
-            _factory.HostName = "localhost";
-            _factory.Port = AmqpTcpEndpoint.UseDefaultPort;
-            var _conn = _factory.CreateConnection();
-            var _channel = _conn.CreateModel();
-            _channel.QueueDeclare("email-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
+            MessageConsumer xd = new MessageConsumer("email-queue");
+            xd.ConsumeStandardQueue();
+            xd.receivedMessage += (model, ea) =>
             {
                 var body = ea.Body.ToArray();
+                var stringBody = Encoding.UTF8.GetString(body);
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received from Rabbit: {0}", message);
             };
-            _channel.BasicConsume(queue: "email-queue",
-                                    autoAck: true,
-                                    consumer: consumer);
+
             Console.ReadLine();
+        }
+        public static void messageHandler(object sender, BasicDeliverEventArgs ea)
+        {
+            var body = ea.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
+            Console.WriteLine(" [x] Received from Rabbit: {0}", message);
         }
     }
 }

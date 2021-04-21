@@ -15,25 +15,25 @@ services:
             - "5341:80"
         environment:
             - ACCEPT_EULA=Y 
-     ocelot-api-gateway:
-                build: 
-                 context: ./OcelotGateway
-                 dockerfile: Dockerfile
-                container_name: ocelotgateway
-                ports:
-                    - "0.0.0.0:8082:80"
-                depends_on:
-                - user-service
-     user-service:
-                build:
-                 context: ./UserService
-                 dockerfile: Dockerfile
-                container_name: userservice
-                ports:
-                    - "0.0.0.0:8081:80"
-                depends_on:
-                    - rabbitmq
-                    - db
+     #ocelot-api-gateway:
+     #           build: 
+     #            context: ./OcelotGateway
+     #            dockerfile: Dockerfile
+     #           container_name: ocelotgateway
+     #           ports:
+     #               - "0.0.0.0:8082:80"
+     #           depends_on:
+     #           - user-service
+     #user-service:
+     #           build:
+     #            context: ./UserService
+     #            dockerfile: Dockerfile
+     #           container_name: userservice
+     #           ports:
+     #               - "0.0.0.0:8081:80"
+     #           depends_on:
+     #               - rabbitmq
+     #               - db
      #email-service:
      #           build:
      #            context: ./EmailService

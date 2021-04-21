@@ -116,7 +116,7 @@ namespace UserService.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> test()
         {
-            _producerService.EnqueueOnSpecificQueue("Hello queue", "email-queue");
+            _producerService.EnqueueOnSpecificQueue("email-queue", new { id=1, name="Job"  });
             _logger.LogInformation("Hit the test function");
             //User user = new User() { Email = "xD@gmail.com" };
             return Ok();
