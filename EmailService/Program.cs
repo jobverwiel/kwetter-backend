@@ -14,7 +14,7 @@ namespace EmailService
             var _factory = new ConnectionFactory();
             _factory.UserName = "guest";
             _factory.Password = "guest";
-            _factory.HostName = "rabbitmq";
+            _factory.HostName = "localhost";
             _factory.Port = AmqpTcpEndpoint.UseDefaultPort;
             var _conn = _factory.CreateConnection();
             var _channel = _conn.CreateModel();

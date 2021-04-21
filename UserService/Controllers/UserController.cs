@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using KwetterMessaging.Interfaces;
+using KwetterMessaging.Producer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +24,14 @@ namespace UserService.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserServiceDatabaseContext _context;
-        private readonly IMessageService _messageService;
-        public UserController(UserServiceDatabaseContext context, IMessageService messageService)
+        private readonly IProducerService _producerService;
+        private readonly ILogger<UserController> _logger;
+        public UserController(UserServiceDatabaseContext context, IProducerService producerService, ILogger<UserController> logger)
         {
             _context = context;
-            _messageService = messageService;
+            _producerService = producerService;
+            _producerService = new MessageProducer("email-queue");
+            _logger = logger;
         }
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
@@ -109,7 +116,8 @@ namespace UserService.Controllers
         [HttpGet("test")]
         public async Task<IActionResult> test()
         {
-            _messageService.Enqueue("Hello queue");
+            _producerService.EnqueueOnSpecificQueue("Hello queue", "email-queue");
+            _logger.LogInformation("Hit the test function");
             //User user = new User() { Email = "xD@gmail.com" };
             return Ok();
         }
