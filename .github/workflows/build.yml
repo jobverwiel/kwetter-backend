@@ -1,1 +1,26 @@
 name: Build the asp.net application
+
+on:
+  push:
+    branches: [ main ]
+
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+
+    - name: 'Install dotnet'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: 'Restory packages'
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+
+    - name: 'Build project'
+      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
