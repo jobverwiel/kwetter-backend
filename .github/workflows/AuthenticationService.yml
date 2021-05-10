@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: 'Change directory'
-      run: ls
+      run: cd AuthenticationService
 
     - name: 'Install dotnet'
       uses: actions/setup-dotnet@v1
