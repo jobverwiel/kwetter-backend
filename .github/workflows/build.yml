@@ -1,8 +1,9 @@
-name: Build the asp.net application
+name: Build the AuthenticationService
 
 on:
   push:
-    branches: [ main ]
+    paths:
+      - "AuthenticationService/**"
 
 
 
