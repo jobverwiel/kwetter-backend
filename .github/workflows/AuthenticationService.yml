@@ -6,7 +6,8 @@ on:
       - "AuthenticationService/**"
       - ".github/workflows/AuthenticationService.yml"
 
-
+env:
+  PATH: 'AuthenticationService/AuthenticationService.csproj'
 
 jobs:
   build:
@@ -15,16 +16,13 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v2
 
-    - name: 'Change directory'
-      run: cd AuthenticationService
-
     - name: 'Install dotnet'
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '5.0.x'
 
     - name: 'Restory packages'
-      run: ls
+      run: dotnet restore ${{ env.PATH }}
 
     - name: 'Build project'
-      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+      run: dotnet build ${{ env.PATH }} --no-restore --configuration Release
