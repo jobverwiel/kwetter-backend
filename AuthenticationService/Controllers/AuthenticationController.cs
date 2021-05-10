@@ -29,7 +29,6 @@ namespace AuthenticationService.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-
             if (string.IsNullOrWhiteSpace(loginViewModel.Username))
             {
                 return BadRequest("Fill in your username");
