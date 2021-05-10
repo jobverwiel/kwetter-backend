@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["AuthenticationService.csproj", ""]
-RUN dotnet restore "AuthenticationService.csproj"
+COPY ["AuthenticationService/AuthenticationService.csproj", "AuthenticationService/"]
+RUN dotnet restore "AuthenticationService/AuthenticationService.csproj"
 COPY . .
 WORKDIR "/src/AuthenticationService"
 RUN dotnet build "AuthenticationService.csproj" -c Release -o /app/build
