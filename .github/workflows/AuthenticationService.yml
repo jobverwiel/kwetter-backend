@@ -24,7 +24,7 @@ jobs:
         dotnet-version: '5.0.x'
 
     - name: 'Restory packages'
-      run: dotnet restore ${{ env.PROJECT_PATH }}
+      run: ls
 
     - name: 'Build project'
-      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore
+      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
