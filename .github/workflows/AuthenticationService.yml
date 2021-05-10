@@ -7,7 +7,7 @@ on:
       - ".github/workflows/AuthenticationService.yml"
 
 env:
-  PATH: 'AuthenticationService/AuthenticationService.csproj'
+  AUTH_PATH: 'AuthenticationService/AuthenticationService.csproj'
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
         dotnet-version: '5.0.x'
 
     - name: 'Restory packages'
-      run: dotnet restore ${{ env.PATH }}
+      run: dotnet restore ${{ env.AUTH_PATH }}
 
     - name: 'Build project'
-      run: dotnet build ${{ env.PATH }} --no-restore --configuration Release
+      run: dotnet build ${{ env.AUTH_PATH }} --no-restore --configuration Release
