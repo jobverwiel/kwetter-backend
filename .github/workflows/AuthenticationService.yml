@@ -36,7 +36,7 @@ jobs:
         sonarProjectKey: ${{ secrets.SONAR_PROJECT_KEY }}
         sonarProjectName:  ${{ secrets.SONAR_PROJECT_NAME }}
         sonarOrganization: ${{ secrets.SONAR_ORGANIZATION }}
-
+        dotnetBuildArguments: ./AuthenticationService
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
