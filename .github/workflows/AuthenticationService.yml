@@ -30,7 +30,7 @@ jobs:
     - name: SonarScanner for .NET 5 with pull request decoration support
       uses: highbyte/sonarscan-dotnet@2.0
       with:
-        sonarProjectKey: ${{ secrets.SONAR_TOKEN }}
+        sonarProjectKey: xDD
         sonarProjectName:  ${{ secrets.SONAR_PROJECT_NAME }}
         sonarOrganization: ${{ secrets.SONAR_ORGANIZATION }}
 
