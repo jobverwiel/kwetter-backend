@@ -28,11 +28,11 @@ jobs:
       run: dotnet build ${{ env.AUTH_PATH }} --no-restore --configuration Release
 
     - name: Cache SonarCloud packages
-        uses: actions/cache@v1
-        with:
-          path: ~\sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      uses: actions/cache@v1
+      with:
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
     - name: Cache SonarCloud scanner
       id: cache-sonar-scanner
       uses: actions/cache@v1
