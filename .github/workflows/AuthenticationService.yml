@@ -32,12 +32,9 @@ jobs:
     - name: SonarScanner for .NET 5 with pull request decoration support
       uses: highbyte/sonarscan-dotnet@2.0
       with:
-        # The key of the SonarQube project
         sonarProjectKey: ${{ secrets.SONAR_PROJECT_KEY }}
-        # The name of the SonarQube project
         sonarProjectName:  ${{ secrets.SONAR_PROJECT_NAME }}
         # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
-        sonarOrganization: ${{ secrets.SONAR_ORGANIZATION }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
