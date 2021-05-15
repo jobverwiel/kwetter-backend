@@ -27,12 +27,11 @@ jobs:
     - name: 'Build project'
       run: dotnet build ${{ env.AUTH_PATH }} --no-restore --configuration Release
 
-    - name: SonarScanner for .NET 5 with pull request decoration support
-      uses: highbyte/sonarscan-dotnet@2.0
-      with:
-        sonarProjectKey: xDD
-        sonarProjectName:  ${{ secrets.SONAR_PROJECT_NAME }}
-        sonarOrganization: ${{ secrets.SONAR_ORGANIZATION }}
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
