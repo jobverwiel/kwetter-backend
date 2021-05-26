@@ -8,7 +8,7 @@ on:
 
 env:
   AUTH_PATH: 'AuthenticationService/AuthenticationService.csproj'
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_AUTRHENTICATION_SERVICE }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
