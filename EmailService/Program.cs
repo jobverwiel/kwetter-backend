@@ -25,8 +25,8 @@ namespace EmailService
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
-                throw ;
+                Console.WriteLine("XD");
+                throw new ArgumentException(e.ToString());
             }
         }
         public static void messageHandler(object sender, BasicDeliverEventArgs ea)
