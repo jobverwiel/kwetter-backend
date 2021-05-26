@@ -22,9 +22,16 @@ namespace UserService
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                // Change server=127.0.0.1 for local development sqlserver for docker
-                optionsBuilder.UseSqlServer("server=127.0.0.1, 1433;user id=sa;password=Your_password123;database=UserService;");
-                
+            {
+                var dbString = Environment.GetEnvironmentVariable("kwetter-db-string");
+                if (string.IsNullOrWhiteSpace(dbString))
+                {
+                    throw new MissingFieldException("Database environment variable not found.");
+                }
+
+                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("aci_db_string").Replace("DATABASE_NAME", "UserService"));
+            }
+
             base.OnConfiguring(optionsBuilder);
         }
     }
