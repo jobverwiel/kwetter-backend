@@ -9,6 +9,10 @@ namespace AuthenticationService.Database_context
 {
     public class AuthenticationServiceDatabaseContext : DbContext
     {
+        public AuthenticationServiceDatabaseContext()
+        {
+
+        }
         public AuthenticationServiceDatabaseContext(DbContextOptions<AuthenticationServiceDatabaseContext> options) : base(options)
         {
 

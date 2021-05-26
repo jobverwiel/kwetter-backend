@@ -64,8 +64,8 @@ namespace UserService
             });
             services.AddDbContext<UserServiceDatabaseContext>();
 
-            using var productContext = new UserServiceDatabaseContext();
-            productContext.Database.EnsureCreated();
+            using var userContext = new UserServiceDatabaseContext();
+            userContext.Database.EnsureCreated();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -62,8 +62,10 @@ namespace AuthenticationService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
             });
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContextPool<AuthenticationServiceDatabaseContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            services.AddDbContext<AuthenticationServiceDatabaseContext>();
+
+            using var userContext = new AuthenticationServiceDatabaseContext();
+            userContext.Database.EnsureCreated();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
