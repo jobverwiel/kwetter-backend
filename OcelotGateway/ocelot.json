@@ -60,7 +60,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "kwetter-user-service",
+          "Host": "kwetter-authentication-service",
           "Port": 80
         }
       ],
