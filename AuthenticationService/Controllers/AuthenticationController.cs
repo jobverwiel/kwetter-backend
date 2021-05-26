@@ -70,11 +70,16 @@ namespace AuthenticationService.Controllers
             {
                 return BadRequest();
             }
-
-            User user = await _context.Users.FirstOrDefaultAsync(x => x.Username == "@" + verificationTokenViewModel.loginViewModel.Username && x.Password == verificationTokenViewModel.loginViewModel.Password);
+            
+            User user = await _context.Users.FirstOrDefaultAsync(x => x.Username == "@" + verificationTokenViewModel.loginViewModel.Username);
+            bool passwordValid = BC.Verify(verificationTokenViewModel.loginViewModel.Password, user.Password);
+            if (!passwordValid)
+            {
+                return BadRequest("Wrong password");
+            }
             if (user == null || string.IsNullOrWhiteSpace(user.VerificationToken))
             {
-                return BadRequest();
+                return BadRequest("Invalid token");
             }
             if (user.VerificationToken != verificationTokenViewModel.VerificationToken)
             {
