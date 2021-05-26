@@ -25,7 +25,7 @@ namespace AuthenticationService.Database_context
                     throw new MissingFieldException("Database environment variable not found.");
                 }
 
-                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("aci_db_string").Replace("DATABASE_NAME", "UserService"));
+                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("kwetter-db-string").Replace("DATABASE_NAME", "UserService"));
             }
             base.OnConfiguring(optionsBuilder);
         }
