@@ -1,4 +1,4 @@
-name: Build the AuthenticationService 
+name: Build the UserService 
 
 on:
   push:
