@@ -30,13 +30,13 @@ jobs:
       run: dotnet build ${{ env.AUTH_PATH }} --no-restore --configuration Release
 
     # https://github.com/highbyte/sonarscan-dotnet
-    - name: SonarScanner for .NET 5
-      uses: highbyte/sonarscan-dotnet@2.0
-      with:
-        sonarProjectKey: jobverwiel-user-service
-        sonarProjectName:  user-service
-        sonarOrganization: jobverwiel
-        dotnetBuildArguments: ./UserService
+    #- name: SonarScanner for .NET 5
+     # uses: highbyte/sonarscan-dotnet@2.0
+      #with:
+       # sonarProjectKey: jobverwiel-user-service
+        #sonarProjectName:  user-service
+        #sonarOrganization: jobverwiel
+        #dotnetBuildArguments: ./UserService
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
