@@ -19,7 +19,6 @@ namespace EmailService
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine(" [x] Received from Rabbit: {0}", message);
             };
-
             Console.ReadLine();
         }
         public static void messageHandler(object sender, BasicDeliverEventArgs ea)

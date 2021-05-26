@@ -27,7 +27,6 @@ namespace AuthenticationService.Database_context
 
                 optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("aci_db_string").Replace("DATABASE_NAME", "UserService"));
             }
-
             base.OnConfiguring(optionsBuilder);
         }
     }
