@@ -33,9 +33,9 @@ jobs:
     - name: SonarScanner for .NET 5
       uses: highbyte/sonarscan-dotnet@2.0
       with:
-        sonarProjectKey: ${{ secrets.SONAR_PROJECT_KEY }}
-        sonarProjectName:  ${{ secrets.SONAR_PROJECT_NAME }}
-        sonarOrganization: ${{ secrets.SONAR_ORGANIZATION }}
+        sonarProjectKey: jobverwiel-user-service
+        sonarProjectName:  user-service
+        sonarOrganization: jobverwiel
         dotnetBuildArguments: ./UserService
     
     - name: Set up Docker Buildx
