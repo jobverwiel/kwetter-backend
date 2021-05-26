@@ -29,7 +29,6 @@ namespace EmailService
             //    throw new ArgumentException(e.ToString());
             //}
             Console.WriteLine("Hello world");
-            Console.ReadLine();
         }
         public static void messageHandler(object sender, BasicDeliverEventArgs ea)
         {
