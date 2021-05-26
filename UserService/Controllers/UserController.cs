@@ -36,6 +36,7 @@ namespace UserService.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
+            _logger.LogInformation("Hit the register function");
             registerViewModel.Username = "@" + registerViewModel.Username;
             if (registerViewModel == null)
             {
