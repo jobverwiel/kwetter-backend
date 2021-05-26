@@ -1,15 +1,13 @@
-name: Build the UserService 
+name: Build the OcelotGateway 
 
 on:
   push:
     paths:
-      - "UserService/**"
-      - ".github/workflows/UserService.yml"
+      - "OcelotGateway/**"
+      - ".github/workflows/OcelotGateway.yml"
 
 env:
-  AUTH_PATH: 'UserService/UserService.csproj'
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_USER_SERVICE }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  AUTH_PATH: 'OcelotGateway/OcelotGateway.csproj'
 
 jobs:
   build:
@@ -28,15 +26,6 @@ jobs:
 
     - name: 'Build project'
       run: dotnet build ${{ env.AUTH_PATH }} --no-restore --configuration Release
-
-    # https://github.com/highbyte/sonarscan-dotnet
-    - name: SonarScanner for .NET 5
-      uses: highbyte/sonarscan-dotnet@2.0
-      with:
-        sonarProjectKey: jobverwiel-user-service
-        sonarProjectName:  user-service
-        sonarOrganization: jobverwiel
-        dotnetBuildArguments: ./UserService
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -50,6 +39,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: UserService
+        context: OcelotGateway
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-user-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-ocelot-gateway:latest

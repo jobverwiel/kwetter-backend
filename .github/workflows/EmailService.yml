@@ -1,14 +1,14 @@
-name: Build the UserService 
+name: Build the EmailService 
 
 on:
   push:
     paths:
-      - "UserService/**"
-      - ".github/workflows/UserService.yml"
+      - "EmailService/**"
+      - ".github/workflows/EmailService.yml"
 
 env:
-  AUTH_PATH: 'UserService/UserService.csproj'
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_USER_SERVICE }}
+  AUTH_PATH: 'EmailService/EmailService.csproj'
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_EMAIL_SERVICE }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -33,10 +33,10 @@ jobs:
     - name: SonarScanner for .NET 5
       uses: highbyte/sonarscan-dotnet@2.0
       with:
-        sonarProjectKey: jobverwiel-user-service
-        sonarProjectName:  user-service
+        sonarProjectKey: jobverwiel-email-service
+        sonarProjectName:  email-service
         sonarOrganization: jobverwiel
-        dotnetBuildArguments: ./UserService
+        dotnetBuildArguments: ./EmailService
     
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -50,6 +50,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        context: UserService
+        context: EmailService
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-user-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-email-service:latest
