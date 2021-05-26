@@ -10,24 +10,26 @@ namespace EmailService
     {
         static void Main(string[] args)
         {
-            try
-            {
-                MessageConsumer xd = new MessageConsumer("email-queue");
-                xd.ConsumeStandardQueue();
-                xd.receivedMessage += (model, ea) =>
-                {
-                    var body = ea.Body.ToArray();
-                    var stringBody = Encoding.UTF8.GetString(body);
-                    var message = Encoding.UTF8.GetString(body);
-                    Console.WriteLine(" [x] Received from Rabbit: {0}", message);
-                };
-                Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("XD");
-                throw new ArgumentException(e.ToString());
-            }
+            //try
+            //{
+            //    MessageConsumer xd = new MessageConsumer("email-queue");
+            //    xd.ConsumeStandardQueue();
+            //    xd.receivedMessage += (model, ea) =>
+            //    {
+            //        var body = ea.Body.ToArray();
+            //        var stringBody = Encoding.UTF8.GetString(body);
+            //        var message = Encoding.UTF8.GetString(body);
+            //        Console.WriteLine(" [x] Received from Rabbit: {0}", message);
+            //    };
+            //    Console.ReadLine();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine("XD");
+            //    throw new ArgumentException(e.ToString());
+            //}
+            Console.WriteLine("Hello world");
+            Console.ReadLine();
         }
         public static void messageHandler(object sender, BasicDeliverEventArgs ea)
         {
